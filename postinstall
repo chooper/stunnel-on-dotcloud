@@ -1,16 +1,31 @@
 #!/bin/bash
 
-cd $HOME/stunnel
+STUNNELDIR=$HOME/stunnel
+
+cd $STUNNELDIR
 
 # Fix perms of certs of stunnel won't use them
 chmod 0600 *.pem
 
 # Sometimes the mirror is down and we have a broken stunnel
-test -x /usr/bin/stunnel4 && { echo "stunnel4 not found!"; exit 1; }
+test -x /usr/bin/stunnel4 || { echo "stunnel4 not found!"; exit 1; }
 
 # Client won't have this var (and won't need it)
 test -z "$PORT_STUNNEL" && PORT_STUNNEL=10000
 
 # Generate stunnel configs
-./gen-stunnel-cfgs.py 127.0.0.1:2222 $PORT_STUNNEL 127.0.0.1:$DOTCLOUD_SERVER_STUNNEL_PORT 4444
+./gen-stunnel-cfgs.py 127.0.0.1:2222 "$PORT_STUNNEL" \
+    "$DOTCLOUD_SERVER_STUNNEL_HOST:$DOTCLOUD_SERVER_STUNNEL_PORT" 4444
+
+# Generate s3cmd config
+./gen-s3cfg.py
+
+# Download priv and pubkey
+s3cmd --config=$STUNNELDIR/s3cmd.cfg get "$STUNNEL_S3_PRIVKEYPATH" $STUNNELDIR/key.pem
+chmod 0600 $STUNNELDIR/key.pem
+
+s3cmd --config=$STUNNELDIR/s3cmd.cfg get "$STUNNEL_S3_PUBKEYPATH" $STUNNELDIR/cert.pem
+chmod 0600 $STUNNELDIR/cert.pem
+
+export
 

@@ -2,7 +2,7 @@ client:
     type: custom
     buildscript: builder
     systempackages:
-        - stunnel
+        - stunnel4
     ports:
         ports_check_workaround: udp
     processes:
@@ -12,7 +12,7 @@ server:
     type: custom
     buildscript: builder
     systempackages:
-        - stunnel
+        - stunnel4
     ports:
         ports_check_workaround: udp
         stunnel: tcp
