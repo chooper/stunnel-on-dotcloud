@@ -4,7 +4,7 @@ STUNNELDIR=$HOME/stunnel
 
 cd $STUNNELDIR
 
-# Fix perms of certs of stunnel won't use them
+# Fix perms of certs or stunnel won't use them
 chmod 0600 *.pem
 
 # Sometimes the mirror is down and we have a broken stunnel
