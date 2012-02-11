@@ -25,7 +25,7 @@ def main(server_connect, server_local_port, client_connect):
 if __name__ == '__main__':
     import sys
 
-    def usage(exit=True, exit_status=1):
+    def usage():
         print
         print 'Usage: {0} <server_connect> <server_local_port> <client_connect>' \
             .format(sys.argv[0])
@@ -36,6 +36,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) < 4:
         usage()
+        sys.exit(1)
 
     server_connect = sys.argv[1]
     server_local_port = sys.argv[2]
