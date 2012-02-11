@@ -10,7 +10,7 @@ is a very simple use of `netcat` that will execute and output the `id` command u
 connection. The second is a client which will connect to the netcat "server" over SSL.
 
 In order to use it, **use this package as the base of your custom services**. If you have existing
-packages already, or are trying to use a different base, you will need to merge the
+custom services already, or are trying to use a different base, you will need to merge the
 `systempackages`, `ports`, and `processes` sections of the `dotcloud.yml`.
 
 Additionally, you will need to append the contents of the provided `builder` script with your own,
