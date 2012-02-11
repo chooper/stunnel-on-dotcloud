@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd $HOME/stunnel
+chmod 0600 *.pem
+./gen-stunnel-cfgs.py 127.0.0.1:2222 3333 127.0.0.1:3333
+

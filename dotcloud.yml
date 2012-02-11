@@ -1,0 +1,11 @@
+client:
+    type: custom
+    buildscript: builder
+    systempackages:
+        - stunnel
+    ports:
+        ports_check_workaround: udp
+    processes:
+        sekreitsvc: netcat -lp2222 -e '/usr/bin/id'
+        serverside: /home/dotcloud/stunnel/stunnel-serverside
+        clientside: /home/dotcloud/stunnel/stunnel-clientside
