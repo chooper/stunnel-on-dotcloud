@@ -1,6 +1,16 @@
 #!/bin/bash
 
 cd $HOME/stunnel
+
+# Fix perms of certs of stunnel won't use them
 chmod 0600 *.pem
-./gen-stunnel-cfgs.py 127.0.0.1:2222 3333 127.0.0.1:3333
+
+# Sometimes the mirror is down and we have a broken stunnel
+test -x /usr/bin/stunnel4 && { echo "stunnel4 not found!"; exit 1; }
+
+# Client won't have this var (and won't need it)
+test -z "$PORT_STUNNEL" && PORT_STUNNEL=10000
+
+# Generate stunnel configs
+./gen-stunnel-cfgs.py 127.0.0.1:2222 $PORT_STUNNEL 127.0.0.1:$DOTCLOUD_SERVER_STUNNEL_PORT 4444
 

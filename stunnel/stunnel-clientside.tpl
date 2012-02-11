@@ -4,7 +4,7 @@
 foreground = yes
 pid = /home/dotcloud/stunnel/stunnel4.pid
 [clientside]
-accept=127.0.0.1:10000
+accept=127.0.0.1:{client_local_port}
 CAfile=/home/dotcloud/stunnel/cert.pem
 cert=/home/dotcloud/stunnel/cert.pem
 key=/home/dotcloud/stunnel/key.pem

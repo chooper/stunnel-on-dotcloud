@@ -4,7 +4,7 @@
 
 import os
 
-def main(server_connect, server_local_port, client_connect):
+def main(server_connect, server_local_port, client_connect, client_local_port):
     # Write clientside config
     with open('stunnel-clientside.tpl','r') as rf:  # TODO: path
         clientside_template = rf.read()
@@ -32,13 +32,14 @@ if __name__ == '__main__':
                 '<client_connect>', '<client_local_port>', ])
         print
 
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         usage()
         sys.exit(1)
 
     server_connect = sys.argv[1]
     server_local_port = sys.argv[2]
     client_connect = sys.argv[3]
+    client_local_port = sys.argv[4]
 
-    main(server_connect, server_local_port, client_connect)
+    main(server_connect, server_local_port, client_connect, client_local_port)
 
