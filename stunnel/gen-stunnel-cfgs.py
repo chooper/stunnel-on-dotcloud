@@ -27,12 +27,10 @@ if __name__ == '__main__':
 
     def usage():
         print
-        print 'Usage: {0} <server_connect> <server_local_port> <client_connect>' \
-            .format(sys.argv[0])
+        print ' '.join(['Usage: {0}'.format(sys.argv[0]),
+                '<server_connect>', '<server_local_port>',
+                '<client_connect>', '<client_local_port>', ])
         print
-
-        if exit:
-            sys.exit(exit_status)
 
     if len(sys.argv) < 4:
         usage()
