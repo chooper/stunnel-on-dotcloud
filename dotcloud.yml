@@ -6,7 +6,7 @@ client:
     ports:
         ports_check_workaround: udp
     processes:
-        clientside: /home/dotcloud/stunnel/stunnel-clientside
+        clientside: /home/dotcloud/stunnel/example-client.stunnel
 
 server:
     type: custom
@@ -18,5 +18,5 @@ server:
         stunnel: tcp
     processes:
         sekreitsvc: netcat -lp2222 -e '/usr/bin/id'
-        serverside: /home/dotcloud/stunnel/stunnel-serverside
+        serverside: /home/dotcloud/stunnel/example-server.stunnel
 

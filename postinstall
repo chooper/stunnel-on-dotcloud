@@ -15,17 +15,19 @@ test -z "$PORT_STUNNEL" && PORT_STUNNEL=10000
 
 # Generate stunnel configs
 # NOTE: The very last argument is the port your "client" listens on localhost for
-# plaintext connections.
-./gen-stunnel-cfgs.py 127.0.0.1:2222 "$PORT_STUNNEL" \
+# plaintext connections. You need one of these lines with a unique config_prefix
+# (first arg) for each one. And, of course, local client port (last arg)
+# needs to be unique as well.
+./gen-stunnel-cfgs.py example 127.0.0.1:2222 "$PORT_STUNNEL" \
     "$DOTCLOUD_SERVER_STUNNEL_HOST:$DOTCLOUD_SERVER_STUNNEL_PORT" 4444
 
 # Generate s3cmd config
 ./gen-s3cfg.py
 
 # Download priv and pubkey
-s3cmd --config=$STUNNELDIR/s3cmd.cfg get "$STUNNEL_S3_PRIVKEYPATH" $STUNNELDIR/key.pem
+s3cmd --config=$STUNNELDIR/s3cmd.cfg --force get "$STUNNEL_S3_PRIVKEYPATH" $STUNNELDIR/key.pem
 chmod 0600 $STUNNELDIR/key.pem
 
-s3cmd --config=$STUNNELDIR/s3cmd.cfg get "$STUNNEL_S3_PUBKEYPATH" $STUNNELDIR/cert.pem
+s3cmd --config=$STUNNELDIR/s3cmd.cfg --force get "$STUNNEL_S3_PUBKEYPATH" $STUNNELDIR/cert.pem
 chmod 0600 $STUNNELDIR/cert.pem
 

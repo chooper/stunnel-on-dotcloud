@@ -18,10 +18,10 @@ as well as the `postinstall`. When editing the `postinstall` script, please take
 usage:
 
 ```bash
-    ./gen-stunnel-cfgs.py <server_connect> <server_local_port> <client_connect> <client_local_port>
+    ./gen-stunnel-cfgs.py <config_prefix> <server_connect> <server_local_port> <client_connect> <client_local_port>
 ```
 
-Please edit the builder script accordingly, paying particular attention to `client_local_port`.
+Please edit the builder script accordingly, paying particular attention to `client_local_port`. Also, you will need to ensure that `config_prefix` is unique for each instance of stunnel you wish to run. A new process will need to be added to your `processes` section in `dotcloud.yml`. The config/stunnel run files are saved as `configprefix-mode.stunnel` where `mode` is either `client` or `server`.
 
 Finally, you will need to put your keys in Amazon S3 and set some dotCloud environment variables
 so we can deploy your keys automatically. Please take care to **configure a private ACL** on these
